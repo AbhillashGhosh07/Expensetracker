@@ -1,0 +1,45 @@
+<html xmlns:th="htts://thymeleaf.org">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+		<script th:src="@{/js/jquery-ui.js}"></script>
+		<script th:src="@{/js/jquery-ui-min.js}"></script>
+		<title>Create Expense</title>
+	</head>
+	<body>
+		<h1>Create New Expense</h1>
+		<hr/>
+		<form th:object="${expense}" th:action="@{/saveOrUpdateExpense}" method="post">
+			<input type="text" placeholder="Enter expense name" th:field="*{name}"/>
+			<br/><br/>
+			
+			<input type="text" placeholder="Enter expense amount" th:field="*{amount}"/>
+			<br/><br/>
+			
+			<input type="text" placeholder="dd/mm/yyyy" th:field="*{stringDate}" id="createdAt"/>
+			<br/><br/>
+			
+			<textarea rows="5" placeholder="Enter description" th:field="*{description}"></textarea>
+			<br/><br/>
+			<input type="hidden" th:field="*{id}"/>
+			<input type="hidden" th:field="*{expenseId}"/>
+			<button type="submit">Submit</button>
+		</form>
+		<a th:href="@{/expencess}">Back To Expenses</a>
+		<script type="text/javascript">
+		$(function() {
+			  $('#createdAt').datepicker({
+			    dateFormat: "dd/mm/yyyy",
+			    changeMonth: true,
+			    changeYear: true,
+			    maxDate: new Date(),
+			    onSelect: function(dateText) {
+			      // Format the date string here (replace with your desired formatting logic)
+			      var formattedDate = dateText.split('/')[0] + "/" + dateText.split('/')[1] + "/" + dateText.split('/')[2].substring(0,4);
+			      $(this).val(formattedDate);
+			    }
+			  });
+			});
+
+		</script>
+	</body>

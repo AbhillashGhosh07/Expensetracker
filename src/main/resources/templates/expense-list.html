@@ -1,7 +1,9 @@
 <html xmlns:th="htts://thymeleaf.org">
 	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<title>Expense Manager - Expenses</title>
 	</head>
+	
 	<body>
 		<h1>List of expenses</h1>
 		<hr/>
@@ -11,6 +13,8 @@
 				<th>Description</th>
 				<th>Amount</th>
 				<th>Date</th>
+				<th>Action</th>
+				<th>Update</th>
 			</thead>
 			
 			<tbody>
@@ -19,9 +23,16 @@
 					<td th:text="${expence.description}"></td>
 					<td th:text="${expence.amount}"></td>
 					<td th:text="${expence.date}"></td>
+					<td>
+						<a th:href="@{/deleteExpenses(id=${expence.expenseId})}"
+						onclick="return confirm('Do you want to delete the expense?')">Delete</a>
+					</td>
+					<td>
+						<a th:href="@{/updateExpenses(id=${expence.expenseId})}">Update</a>
+					</td>
 				</tr>
 			</tbody>
-		
+		    
 		</table>
 	</body>
 </html>
